@@ -5,29 +5,44 @@
 package components;
 
 import java.awt.Graphics;
-import models.ModelItem;
+import java.text.NumberFormat;
+import java.util.Locale;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+import models.ModelTransaction;
+import models.ModelUser;
+import services.ProductServices;
 
 /**
  *
  * @author Rafy1
  */
 public class ProductCart extends javax.swing.JPanel {
-
-    private boolean selected;
-
-    public boolean isSelected() {
-        return selected;
-    }
-
-    public void setSelected(boolean selected) {
-        this.selected = selected;
-        repaint();
+    
+    private ModelTransaction data;
+    ModelUser user = new ModelUser();
+    
+    private int id;
+    private int jumlah;
+    private int stok;
+    
+    private Runnable onUpdate;
+    
+    NumberFormat nf = NumberFormat.getInstance(Locale.of("id", "ID"));
+    
+    public void setOnUpdate(Runnable onUpdate){
+        this.onUpdate = onUpdate;
     }
     
-    
-    private ModelItem data;
-    public void setData(ModelItem data) {
+    public void setData(ModelTransaction data) {
         this.data = data;
+        lbNameProduct.setText(data.getNamaProduct());
+        lbPrice.setText("Rp. " + nf.format(data.getTotal_harga()));
+        lbJumlah.setText(Integer.toString(data.getTotal_jumlah()));
+        pic.setImage(data.getGambar());
+        id = data.getIdProduct();
+        jumlah = data.getTotal_jumlah();
+        stok = data.getStok();
     }
 
     @Override
@@ -48,59 +63,124 @@ public class ProductCart extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pictureBox1 = new components.PictureBox();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        pic = new components.PictureBox();
+        lbNameProduct = new javax.swing.JLabel();
+        lbPrice = new javax.swing.JLabel();
+        lbJumlah = new javax.swing.JLabel();
+        ButtonPlus = new javax.swing.JButton();
+        ButtonMinus = new javax.swing.JButton();
 
-        pictureBox1.setImage(new javax.swing.ImageIcon(getClass().getResource("/images/p1.png"))); // NOI18N
+        pic.setImage(new javax.swing.ImageIcon(getClass().getResource("/images/p1.png"))); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        jLabel1.setText("Name Product");
+        lbNameProduct.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        lbNameProduct.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lbNameProduct.setText("Name Product");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
-        jLabel2.setText("Rp. 100.000");
+        lbPrice.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
+        lbPrice.setText("Rp. 100.000");
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        jLabel3.setText("1");
+        lbJumlah.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        lbJumlah.setText("1");
+
+        ButtonPlus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add.png"))); // NOI18N
+        ButtonPlus.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ButtonPlus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonPlusActionPerformed(evt);
+            }
+        });
+
+        ButtonMinus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/remove.png"))); // NOI18N
+        ButtonMinus.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ButtonMinus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonMinusActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(pictureBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pic, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbNameProduct, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addGap(0, 120, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
-                        .addGap(24, 24, 24))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lbPrice)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(ButtonMinus)
+                                .addGap(16, 16, 16)
+                                .addComponent(lbJumlah)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(ButtonPlus)))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pictureBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pic, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addComponent(jLabel1)
+                .addComponent(lbNameProduct)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
-                .addComponent(jLabel3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lbPrice)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 20, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbJumlah)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(ButtonPlus, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(ButtonMinus, javax.swing.GroupLayout.Alignment.TRAILING)))))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void ButtonPlusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonPlusActionPerformed
+        if(jumlah >= 10){
+            JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), "Pembelian barang tidak boleh lebih dari 10 unit!");
+            jumlah = 10;
+            return;
+        } else if(jumlah >= stok){
+            JOptionPane.showMessageDialog(SwingUtilities.getWindowAncestor(this), "Stok untuk barang ini hanya tersisa " + stok + " unit saja!");
+            return;
+        }
+        
+        ProductServices buy = new ProductServices();
+        jumlah++;
+        lbJumlah.setText(Integer.toString(jumlah));
+        buy.buyProductService(user.getId(), id, 1);
+        
+        if(onUpdate != null){
+            onUpdate.run();
+        }
+    }//GEN-LAST:event_ButtonPlusActionPerformed
+
+    private void ButtonMinusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonMinusActionPerformed
+        ProductServices buy = new ProductServices();
+        jumlah--;
+        lbJumlah.setText(Integer.toString(jumlah));
+        buy.buyProductService(user.getId(), id, -1);
+        
+        if(onUpdate != null){
+            onUpdate.run();
+        }
+    }//GEN-LAST:event_ButtonMinusActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private components.PictureBox pictureBox1;
+    private javax.swing.JButton ButtonMinus;
+    private javax.swing.JButton ButtonPlus;
+    private javax.swing.JLabel lbJumlah;
+    private javax.swing.JLabel lbNameProduct;
+    private javax.swing.JLabel lbPrice;
+    private components.PictureBox pic;
     // End of variables declaration//GEN-END:variables
 }

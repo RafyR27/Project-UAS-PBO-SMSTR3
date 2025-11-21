@@ -4,6 +4,20 @@
  */
 package main;
 
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+import models.ModelAlamat;
+import models.ModelUser;
+import pages.CartPage;
+import pages.CheckPaymentPage;
+import pages.HomePage;
+import pages.LoginPage;
+import pages.PaymentPage;
+import pages.ProductPage;
+import pages.RegisterPage;
+import pages.RiwayatPage;
+import pages.SuccessPage;
+
 /**
  *
  * @author Rafy1
@@ -12,11 +26,27 @@ public class MainFrame extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainFrame.class.getName());
 
-    /**
-     * Creates new form MainFrame
-     */
+    private CardLayout cardLayout;   
+    private JPanel mainPanel;
+    private CartPage cartPage;
+    private ProductPage productPage;
+    private PaymentPage paymentPage;
+    private CheckPaymentPage checkPaymentPage;
+    private SuccessPage successPage;
+    private HomePage homePage;
+    private RiwayatPage riwayatPage;
+    
     public MainFrame() {
         initComponents();
+        setLocationRelativeTo(null);
+        cardLayout = new CardLayout();
+        mainPanel = new JPanel(cardLayout);
+        // Tambah halaman        
+        mainPanel.add(new RegisterPage(this), "register");
+        mainPanel.add(new LoginPage(this), "login");
+        
+        setContentPane(mainPanel);
+        showPage("login");
     }
 
     /**
@@ -29,18 +59,18 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 500));
+        setMaximumSize(new java.awt.Dimension(2000, 1700));
         setResizable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addGap(0, 1000, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
+            .addGap(0, 600, Short.MAX_VALUE)
         );
 
         pack();
@@ -69,6 +99,97 @@ public class MainFrame extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new MainFrame().setVisible(true));
+    }
+    
+    public void showHomePage(){
+        if (homePage == null) {
+            homePage = new HomePage(this);
+            mainPanel.add(homePage, "home");
+        }
+        
+        homePage.loadData();
+        showPage("home");
+    }
+    
+    public void showCartPage(int userId){
+        if (cartPage == null) {
+            cartPage = new CartPage(this);
+            mainPanel.add(cartPage, "cart");
+        }
+        
+        cartPage.loadData(userId);
+        showPage("cart");
+    }
+    
+    public void showProductPage(int id_product) {
+        if (productPage == null) {
+            productPage = new ProductPage(this);
+            mainPanel.add(productPage, "product");
+        }
+
+        productPage.loadData(id_product);
+        showPage("product");
+    }
+    
+    public void showPaymentPage(int id_user) {
+        if (paymentPage == null) {
+            paymentPage = new PaymentPage(this);
+            mainPanel.add(paymentPage, "payment");
+        }
+
+        paymentPage.loadData(id_user);
+        showPage("payment");
+    }
+    
+    public void showCheckPaymentPage(String metode_pembayaran, String order_id, int total_price) {
+        if (checkPaymentPage == null) {
+            checkPaymentPage = new CheckPaymentPage(this);
+            mainPanel.add(checkPaymentPage, "checkPayment");
+        }
+
+        checkPaymentPage.loadData(metode_pembayaran, order_id, total_price);
+        showPage("checkPayment");
+    }
+    
+    public void showSuccessPage(String order_id, int total_price) {
+        if (successPage == null) {
+            successPage = new SuccessPage(this);
+            mainPanel.add(successPage, "success");
+        }
+
+        successPage.loadData(order_id, total_price);
+        showPage("success");
+    }
+    
+    public void showRiwayatPage(int id_user) {
+        if (riwayatPage == null) {
+            riwayatPage = new RiwayatPage(this);
+            mainPanel.add(riwayatPage, "riwayat");
+        }
+
+        riwayatPage.loadData(id_user);
+        showPage("riwayat");
+    }
+    
+    public void showPage(String name) {
+        cardLayout.show(mainPanel, name);
+    }
+    
+    public void logout() {
+        ModelUser user = new ModelUser();
+        ModelAlamat ma = new ModelAlamat();
+        
+        user.setId(-1);
+        user.setFullname(null);
+        user.setEmail(null);
+        user.setRole(null);
+        
+        ma.setId(-1);
+        ma.setAlamat(null);
+        ma.setKode_pos(null);
+        ma.setNo_telp(null);
+        
+        showPage("login");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -5,7 +5,12 @@
 package components;
 
 import java.awt.Graphics;
-import models.ModelItem;
+import java.text.NumberFormat;
+import java.util.Locale;
+import javax.swing.SwingUtilities;
+import main.MainFrame;
+import models.ModelProduct;
+import models.ModelUser;
 
 /**
  *
@@ -13,24 +18,23 @@ import models.ModelItem;
  */
 public class Product extends javax.swing.JPanel {
 
-    private boolean selected;
-
-    public boolean isSelected() {
-        return selected;
-    }
-
-    public void setSelected(boolean selected) {
-        this.selected = selected;
-        repaint();
-    }
+    private int id;
+    
+    NumberFormat nf = NumberFormat.getInstance(Locale.of("id", "ID"));
+    
+    private ModelProduct data;
+    ModelUser user = new ModelUser();
     
     public Product() {
         initComponents();
     }
-    
-    private ModelItem data;
-    public void setData(ModelItem data) {
+ 
+    public void setData(ModelProduct data) {
         this.data = data;
+        lbNameProduct.setText(data.getNamaProduct());
+        lbPrice.setText("Rp. " + nf.format(data.getPrice()));
+        pic.setImage(data.getImage());
+        id = data.getId();
     }
 
     @Override
@@ -52,7 +56,8 @@ public class Product extends javax.swing.JPanel {
         lbNameProduct = new javax.swing.JLabel();
         pic = new components.PictureBox();
         lbPrice = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        buttonBuy = new javax.swing.JButton();
+        lbJumlah = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(238, 238, 238));
 
@@ -64,14 +69,17 @@ public class Product extends javax.swing.JPanel {
         lbPrice.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         lbPrice.setText("Rp. 5.000.000");
 
-        jButton1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cart.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        buttonBuy.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
+        buttonBuy.setForeground(new java.awt.Color(255, 255, 255));
+        buttonBuy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cart.png"))); // NOI18N
+        buttonBuy.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonBuy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                buttonBuyActionPerformed(evt);
             }
         });
+
+        lbJumlah.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -86,7 +94,9 @@ public class Product extends javax.swing.JPanel {
             .addComponent(pic, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lbJumlah)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(buttonBuy, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -98,18 +108,22 @@ public class Product extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbPrice)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(buttonBuy)
+                    .addComponent(lbJumlah))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void buttonBuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBuyActionPerformed
+        MainFrame main = (MainFrame) SwingUtilities.getWindowAncestor(this);
+        main.showProductPage(id);
+    }//GEN-LAST:event_buttonBuyActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton buttonBuy;
+    private javax.swing.JLabel lbJumlah;
     private javax.swing.JLabel lbNameProduct;
     private javax.swing.JLabel lbPrice;
     private components.PictureBox pic;
