@@ -8,6 +8,8 @@ import java.awt.CardLayout;
 import javax.swing.JPanel;
 import models.ModelAlamat;
 import models.ModelUser;
+import pages.AdminProductPage;
+import pages.AdminTransactionPage;
 import pages.CartPage;
 import pages.CheckPaymentPage;
 import pages.HomePage;
@@ -35,6 +37,8 @@ public class MainFrame extends javax.swing.JFrame {
     private SuccessPage successPage;
     private HomePage homePage;
     private RiwayatPage riwayatPage;
+    private AdminProductPage adminProductPage;
+    private AdminTransactionPage adminTransactionPage;
     
     public MainFrame() {
         initComponents();
@@ -169,6 +173,36 @@ public class MainFrame extends javax.swing.JFrame {
 
         riwayatPage.loadData(id_user);
         showPage("riwayat");
+    }
+    
+    public void showAdminProductPage(String role) {
+        if(!role.equals("admin")){
+            showPage("login");
+            return;
+        }
+        
+        if (adminProductPage == null) {
+            adminProductPage = new AdminProductPage(this);
+            mainPanel.add(adminProductPage, "adminProduct");
+        }
+
+        adminProductPage.loadData();
+        showPage("adminProduct");
+    }
+    
+    public void showAdminTransactionPage(String role) {
+        if(!role.equals("admin")){
+            showPage("login");
+            return;
+        }
+        
+        if (adminTransactionPage == null) {
+            adminTransactionPage = new AdminTransactionPage(this);
+            mainPanel.add(adminTransactionPage, "adminTransaction");
+        }
+
+        adminTransactionPage.loadData();
+        showPage("adminTransaction");
     }
     
     public void showPage(String name) {

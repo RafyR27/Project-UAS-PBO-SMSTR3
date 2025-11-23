@@ -29,7 +29,7 @@ public class HomeView extends javax.swing.JPanel {
         initComponents();
         
 
-        JMenuItem RiwayatPesanan = new JMenuItem("Riwayat Pesanan ");
+        JMenuItem RiwayatPesanan = new JMenuItem("Riwayat Pesanan");
         JMenuItem logout = new JMenuItem("Logout");
 
         popMenu.add(RiwayatPesanan);

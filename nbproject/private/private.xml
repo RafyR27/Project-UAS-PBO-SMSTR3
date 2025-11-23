@@ -3,22 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Rafy1/OneDrive/Desktop/Java/perkuliahan/UAS/Project_UAS/src/pages/CheckPaymentPage.java</file>
-            <file>file:/C:/Users/Rafy1/OneDrive/Desktop/Java/perkuliahan/UAS/Project_UAS/src/components/PaymentView.java</file>
-            <file>file:/C:/Users/Rafy1/OneDrive/Desktop/Java/perkuliahan/UAS/Project_UAS/src/pages/PaymentPage.java</file>
-            <file>file:/C:/Users/Rafy1/OneDrive/Desktop/Java/perkuliahan/UAS/Project_UAS/src/components/PaymentList.java</file>
-            <file>file:/C:/Users/Rafy1/OneDrive/Desktop/Java/perkuliahan/UAS/Project_UAS/src/services/TransactionServices.java</file>
-            <file>file:/C:/Users/Rafy1/OneDrive/Desktop/Java/perkuliahan/UAS/Project_UAS/src/services/UserServices.java</file>
-            <file>file:/C:/Users/Rafy1/OneDrive/Desktop/Java/perkuliahan/UAS/Project_UAS/src/models/ModelTransaction.java</file>
-            <file>file:/C:/Users/Rafy1/OneDrive/Desktop/Java/perkuliahan/UAS/Project_UAS/src/main/MainFrame.java</file>
-            <file>file:/C:/Users/Rafy1/OneDrive/Desktop/Java/perkuliahan/UAS/Project_UAS/src/models/ModelAlamat.java</file>
-            <file>file:/C:/Users/Rafy1/OneDrive/Desktop/Java/perkuliahan/UAS/Project_UAS/src/components/Product.java</file>
             <file>file:/C:/Users/Rafy1/OneDrive/Desktop/Java/perkuliahan/UAS/Project_UAS/src/components/HomeView.java</file>
-            <file>file:/C:/Users/Rafy1/OneDrive/Desktop/Java/perkuliahan/UAS/Project_UAS/src/models/ModelUser.java</file>
-            <file>file:/C:/Users/Rafy1/OneDrive/Desktop/Java/perkuliahan/UAS/Project_UAS/src/services/Auth.java</file>
-            <file>file:/C:/Users/Rafy1/OneDrive/Desktop/Java/perkuliahan/UAS/Project_UAS/src/pages/LoginPage.java</file>
-            <file>file:/C:/Users/Rafy1/OneDrive/Desktop/Java/perkuliahan/UAS/Project_UAS/src/pages/RegisterPage.java</file>
-            <file>file:/C:/Users/Rafy1/OneDrive/Desktop/Java/perkuliahan/UAS/Project_UAS/src/services/ProductServices.java</file>
+            <file>file:/C:/Users/Rafy1/OneDrive/Desktop/Java/perkuliahan/UAS/Project_UAS/src/components/Product.java</file>
+            <file>file:/C:/Users/Rafy1/OneDrive/Desktop/Java/perkuliahan/UAS/Project_UAS/src/main/MainFrame.java</file>
+            <file>file:/C:/Users/Rafy1/OneDrive/Desktop/Java/perkuliahan/UAS/Project_UAS/src/components/ProductCart.java</file>
+            <file>file:/C:/Users/Rafy1/OneDrive/Desktop/Java/perkuliahan/UAS/Project_UAS/src/components/adminView.java</file>
         </group>
     </open-files>
 </project-private>

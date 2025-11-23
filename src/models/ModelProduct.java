@@ -17,6 +17,7 @@ public class ModelProduct {
     private Icon image;
     private String deskripsi;
     private int stok;
+    private byte[] imgBytes;
     
     public ModelProduct(int Id, String namaProduct, int price, String deskripsi, int stok, Icon image) {
         this.Id = Id;
@@ -51,4 +52,17 @@ public class ModelProduct {
     public int getStok() {
         return stok;
     }
+
+    public byte[] getImgBytes() {
+        return imgBytes;
+    }
+
+    public void setImgBytes(byte[] imgBytes) {
+        this.imgBytes = imgBytes;
+    }
+
+    
+    
+    
+    
 }

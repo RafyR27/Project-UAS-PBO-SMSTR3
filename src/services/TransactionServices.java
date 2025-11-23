@@ -75,7 +75,7 @@ public class TransactionServices extends Databases {
     }
     
     public int updatePaymentService(String order_id){
-        String sqlUpdatePayment = "UPDATE payment SET payment_status = 'success' WHERE order_id = ?";
+        String sqlUpdatePayment = "UPDATE payment SET payment_status = 'success', order_status = 'dikirim' WHERE order_id = ?";
         String sqlSelectTransaksi = "SELECT id_product, jumlah FROM transaksi WHERE order_id = ?";
         String sqlUpdateProduct = "UPDATE product SET stok = stok - ? WHERE id_product = ?";
 

@@ -200,9 +200,7 @@ public class LoginPage extends javax.swing.JPanel {
         
         if(result == 200){
             if(user.getRole().equals("admin")){
-                // frame to admin panel   
-                System.out.println("hallo admin");
-                
+                frame.showAdminProductPage(user.getRole());
                 fieldEmail.setText(null);
                 fieldPassword.setText(null);
                 return;

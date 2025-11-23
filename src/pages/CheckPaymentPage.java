@@ -68,6 +68,7 @@ public class CheckPaymentPage extends javax.swing.JPanel {
         initComponents();
         
         lbVirtualAccount.setVisible(false);
+        pictureBox.setVisible(false);
     }
     
     public void loadData(String metode_pembayaran, String order_id, int total_price){
@@ -77,26 +78,31 @@ public class CheckPaymentPage extends javax.swing.JPanel {
         lbTotal_Price.setText("Rp. " + nf.format(total_price));
         
         if(metode_pembayaran.equals("QRIS")){
+            lbVirtualAccount.setVisible(false);
+            pictureBox.setVisible(true);
             TextArea.setText(qrisDesk);
             pictureBox.setImage(new javax.swing.ImageIcon(getClass().getResource("/images/qr.png")));
             lbPembayaran.setText("Qris");
         } else if(metode_pembayaran.equals("BCA")){
+            pictureBox.setVisible(false);
+            lbVirtualAccount.setVisible(true);
             TextArea.setText(bcaDesk);
             pictureBox.setImage(null);
             lbPembayaran.setText("Virtual Account");
-            lbVirtualAccount.setVisible(true);
             lbVirtualAccount.setText("123456788901023");
         } else if (metode_pembayaran.equals("BNI")) {
+            pictureBox.setVisible(false);
+            lbVirtualAccount.setVisible(true);
             TextArea.setText(bniDesk);
             pictureBox.setImage(null);
             lbPembayaran.setText("Virtual Account");
-            lbVirtualAccount.setVisible(true);
             lbVirtualAccount.setText("8808001234567890");
         } else if (metode_pembayaran.equals("BRI")) {
+            pictureBox.setVisible(false);
+            lbVirtualAccount.setVisible(true);
             TextArea.setText(briDesk);
             pictureBox.setImage(null);
             lbPembayaran.setText("Virtual Account");
-            lbVirtualAccount.setVisible(true);
             lbVirtualAccount.setText("2255512345678901");
         }
     }
@@ -115,9 +121,9 @@ public class CheckPaymentPage extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         lbPembayaran = new javax.swing.JLabel();
         pictureBox = new components.PictureBox();
-        lbVirtualAccount = new javax.swing.JLabel();
         lbTotal_Price = new javax.swing.JLabel();
         lb2 = new javax.swing.JLabel();
+        lbVirtualAccount = new javax.swing.JLabel();
         lbIntruksiPembayaran = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TextArea = new javax.swing.JTextArea();
@@ -152,12 +158,6 @@ public class CheckPaymentPage extends javax.swing.JPanel {
 
         pictureBox.setImage(new javax.swing.ImageIcon(getClass().getResource("/images/qr.png"))); // NOI18N
 
-        lbVirtualAccount.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lbVirtualAccount.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbVirtualAccount.setText("Virtual Account");
-        pictureBox.add(lbVirtualAccount);
-        lbVirtualAccount.setBounds(-60, 0, 400, 25);
-
         lbTotal_Price.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lbTotal_Price.setForeground(new java.awt.Color(0, 101, 248));
         lbTotal_Price.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -165,6 +165,10 @@ public class CheckPaymentPage extends javax.swing.JPanel {
 
         lb2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lb2.setText("Total");
+
+        lbVirtualAccount.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbVirtualAccount.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbVirtualAccount.setText("Virtual Account");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -174,26 +178,33 @@ public class CheckPaymentPage extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(pictureBox, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(83, 83, 83))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lbTotal_Price, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lb2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lbPembayaran, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE))
-                .addGap(17, 17, 17))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lbVirtualAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lbTotal_Price, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lb2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbPembayaran, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE))
+                        .addGap(17, 17, 17))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(lbPembayaran)
-                .addGap(36, 36, 36)
+                .addGap(26, 26, 26)
+                .addComponent(lbVirtualAccount)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pictureBox, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lb2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbTotal_Price)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         lbIntruksiPembayaran.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -240,9 +251,9 @@ public class CheckPaymentPage extends javax.swing.JPanel {
                                         .addComponent(lbIntruksiPembayaran, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGap(52, 52, 52))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)))
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE)
+                                        .addGap(33, 33, 33)))
+                                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(29, 29, 29)))
                 .addContainerGap())
         );
@@ -252,13 +263,13 @@ public class CheckPaymentPage extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lbIntruksiPembayaran)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(33, 33, 33)
                 .addComponent(ButtonBeli2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22))
         );
